@@ -1,0 +1,28 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %} Confirm Checkout {% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row"  style="margin-top: 20px;">
+            <div class="col-md-4">
+                <img style="max-height: 500px; max-width:64%;" src="{{course.image.url}}" class="rounded mx-auto d-block" alt="...">
+            </div>
+            <div class="col-md-8">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div>
+                            <h2>Order Summary</h2>
+                            <hr>
+                            <br>
+                            <h3>{{course.title}}</h3>
+                            
+                            <p style="margin-top: 15px;"><b>Price ₹ {{course.coursePrice}}</b></p>
+                            <p style="margin-top: 10px;"><a href="#" class="btn btn-outline-success btn-lg"><img src="/media/icons/24px.svg"> Proceed to Checkout</a></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

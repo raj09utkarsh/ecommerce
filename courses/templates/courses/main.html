@@ -1,0 +1,137 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block content %}
+{% if courses.number == 1 %}
+    <header class="intro">
+        <div class="background-image"></div>
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-2">
+                        <h1 class="brand-heading">Exponential Classes</h1>
+                        <p class="intro-text" style="font-family: 'Roboto Slab', serif;">We Teach, We Educate
+                            <br>Join Us And Be Prepared For JEE Mains/Advanced
+                        </p>
+                        <a href="#courses" class="btn btn-circle page-scroll scroll-down-i">
+                            <i class="fa fa-angle-double-down animated" style="color: white;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container mt-5">
+        <div class="container">
+            <div class="row">
+            <div class="header-2-bottom">
+                WHAT YOU GET
+            </div>
+        </div>
+            <div class="row text-center">
+                <div class="card col-md-4 h-list" style="width: 18rem; margin: 0 auto;">
+                        <img style="padding-top: 10px; max-height: 200px;" src="/media/background/teacher.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Professional Group of Teachers</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                </div>
+                <div class="card col-md-4" style="width: 18rem; margin: 0 auto;">
+                        <img style="padding-top: 10px; max-height: 200px;" src="/media/background/stu2.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Quality Education</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                </div>
+                <div class="card col-md-4" style="width: 18rem; margin: 0 auto;">
+                        <img style="padding-top: 10px; max-height: 200px;" src="/media/background/support.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">24*7 Support</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    
+
+
+    {% endif %}
+
+    <div class="container courses" style="margin-bottom: 50px;" id = "courses">
+        <div class="row">
+            <div class="header-2-bottom mt-5 pt-3">
+                COURSES WE OFFER
+            </div>
+        </div>
+        <div class="row"  style="padding-top: 20px;">
+            <div class="col-md">
+                <div class="row mt-5">
+                    {% for course in courses %}
+                        <div class="card col-md-4" style="width: 18rem; margin: 1px 0 ;">
+                            <div style="height:190px;" class="text-center">
+                                <img style="padding-top: 10px; max-height: 200px; max-width: 240px; margin: 20px auto;" src="{{course.image.url}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{course}}</h5>
+                                <p class="card-text text-muted"><small>{{course.description|truncatewords:20|linebreaks}}</small></p>
+                                <p><img src="/media/icons/24px.svg"> ₹ {{course.coursePrice}}</p>
+                               <a class="btn btn-outline-info btn-lg" href="{% url 'detail' course_id=course.pk %}">View More</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+            {% comment %} <div class="col-md-3 mt-5">
+                
+                <ul class="list-group">
+                    <li class="list-group-item"><h5>Latest Courses</h5></li>
+                    
+                    {% for course in latest_courses %}
+                        <li class="list-group-item"><a href="{% url 'detail' course_id=course.pk %}">{{course.title}} </a><small>on {{course.dateAdded}}</small></li>
+                    {% endfor %}
+                </ul>
+            </div> {% endcomment %}
+        </div>
+        <div class="pagination row mt-5">
+            <div class="col-md-12" style="text-align: center; margin-top:5px; margin-bottom: 10px;">
+                <span class="step-links">
+                    {% if courses.has_previous %}
+                        <a style="color: black;"  href="?page=1">&laquo; First</a>
+                        <a style="color: black;"  href="?page={{ courses.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{courses.number}} of {{courses.paginator.num_pages}}
+                    </span>
+                    {% if courses.has_next %}
+                        <a style="color: black;" href="?page={{courses.next_page_number}}">Next</a>
+                        <a style="color: black;"  href="?page={{courses.paginator.num_pages }}">Last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+            
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'accounts/base.html' %}
+{% block title %} Profile {% endblock %}
+
+{% block content %}
+    
+    <div class="container profile-container">
+        <div class="row">
+            <div class="col-md-4 text-center">
+                <p>
+                    <img src="/media/default-user.jpg" class="usrimg">
+                    <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
+                </p>
+            </div>
+            <div class="col-md-8" style="margin-top: 20px;">
+                <h2>List of courses enrolled in</h2>
+                <ul class="list-group mt-4"></ul>
+                    {% for course in enrolled_courses %}
+                        <li class="list-group-item">{{course.course}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

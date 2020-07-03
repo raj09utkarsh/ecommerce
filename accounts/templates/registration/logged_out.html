@@ -1,0 +1,8 @@
+{% extends 'accounts/base.html' %}
+{% block title %}Logout{% endblock %}
+{% block content %} 
+    <div class="container loggedOut pt-4">
+        <h3 class="pb-4">You have been logged out. </h3>
+        <p><a href="{% url 'login' %}" class="btn btn-outline-dark">Click here to login</a></p>
+    </div>
+{% endblock %}
